@@ -1,33 +1,77 @@
-# Project
+# 📠 The DialOp Environments
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+_Collaborative decision-oriented dialogue environments for humans and LLM agents._
 
-As the maintainer of this project, please make a few updates:
+These environments are associated with the paper **Decision-Oriented Dialogue For Human-AI Collaboration**.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+[[Paper]](https://arxiv.org/abs/2305.20076)
+[[Website]](https://collaborative-dialogue.github.io/)
 
-## Contributing
+![](assets/envs.png)
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+# Play against GPT-3
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+Get started and play the games with GPT-3 as an assistant:
+```
+pip install -e .
+vim dialop/.api_key
+python dialop/play_gpt3.py --game {optimization, planning, mediation}
+```
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+# Overview
 
-## Trademarks
+<p align="center">
+<img src="assets/overview.png" width="500">
+</p>
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+- `games`: define game logic, environment data generation
+- `envs`: text-based interfaces for games
+- `apps`: web app interfaces for games for human-human play
+
+
+| Name         | Description   | Human UI           | Agent Text Interface | Hosted UI             |
+| ------------ | ------------- | ------------------ | --------------------------------- | ------- |
+| `Optimization` | Assign the best reviewers for conference papers | ![Optimization UI](assets/optimization_ui.png) | ![Optimization Text Interface](assets/optimization_text.png) | [Play now](http://reviewer-matching.herokuapp.com/) |
+| `Planning` | Plan the best itinerary with the least travel and price | ![Planning UI](assets/planning_ui.png) | ![Planning Text Interface](assets/planning_text.png) | [Play now](https://itinerary-planning.herokuapp.com/)
+| `Mediation` | Coordinate a set of group flights that works well for everyone | ![Mediation UI](assets/mediation_ui.png) | ![Mediation Text Interface](assets/mediation_text.png) | [Play now](https://collaborative-dialogue.herokuapp.com/)
+
+**To play against yourself with the text-based environment:**
+```
+python dialop/play.py --game {optimization, planning, mediation}
+```
+**To play against yourself with the web UI:**
+```
+cd dialop/apps
+game={optimization, planning, mediation} flask run
+```
+For Planning, you'll need to input a MapboxGL access key in `static/client.js` to show the map on the agent side.
+
+# Human-Human Dialogues
+
+To see human-human dialogues:
+```
+unzip dialop/data.zip
+```
+
+# Self-Play and Prompted Self-Play Evaluation
+
+Coming soon!
+
+# Citation
+```
+@article{lin2023decision,
+  title={Decision-Oriented Dialogue for Human-AI Collaboration},
+  author={Lin, Jessy and Tomlin, Nicholas and Andreas, Jacob and Eisner, Jason},
+  journal={Transactions of the Association for Computational Linguistics}
+  year={2024}
+}
+```
+
+# Trademarks
+
+This project may contain trademarks or logos for projects, products,
+or services. Authorized use of Microsoft trademarks or logos is subject to and
+must follow Microsoft’s Trademark & Brand Guidelines. Use of Microsoft
+trademarks or logos in modified versions of this project must not cause
+confusion or imply Microsoft sponsorship. Any use of third-party trademarks or
+logos are subject to those third-party’s policies.
